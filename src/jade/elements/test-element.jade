@@ -1,0 +1,13 @@
+extends element
+
+block vars
+    :coffeescript
+        elementName = 'test-element'
+
+block element
+    template
+      p#check-polymer Yahello polymer!
+    script
+        :coffeescript
+            Polymer elementName, ->
+                foo: 'bar'

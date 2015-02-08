@@ -1,0 +1,24 @@
+doctype
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE-edge')
+        title generate test
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+
+        // build
+        link(rel='stylesheet', href='../bower_componetnts/normlize-css/normalize.css')
+        link(rel='stylesheet', href='/css/main.css')
+
+        // elements import
+        script(src='bower_componets/platform/platform.js')
+        link(rel='import', href='elements/test-element.jade')
+
+
+    body
+        #wrapper
+            .container
+                p#check-html "Yahello jade! to Yahello Html!"
+                p#check-js
+                p#check-css(style='display: none;') "yahello stylus! to Yahello css!"
+                test-element

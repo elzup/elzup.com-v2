@@ -4,23 +4,24 @@ gutil = require 'gulp-util'
 $ = require('gulp-load-plugins')()
 
 # config
-src_dir = './src'
-public_dir = './public'
+# src_dir = './src'
+# public_dir = './public'
 
-$config =
-  src:
-    jade_dir:   src_dir + '/jade'
-    coffee_dir: src_dir + '/coffee'
-    stylus_dir: src_dir + '/stylus'
-  public:
-    html_dir: public_dir + '/html'
-    css_dir:  public_dir + '/css'
-    js_dir:   public_dir + '/js'
-    img_dir:  public_dir + '/img'
-
-$config.src.jade_files   = [$config.src.jade_dir + '/*.jade', $config.src.jade_dir + '/*/*.jade']
-$config.src.coffee_files = $config.src.coffee_dir + '/*.coffee'
-$config.src.stylus_files = $config.src.stylus_dir + '/*.styl'
+config =
+  templates:
+    source: './src/jade'
+    watch: ['./src/jade/*.jade', './src/jade/*/*.jade']
+    destination: './public/templates'
+  scripts:
+    source: './src/coffee'
+    watch: './src/coffee/*.coffee'
+    destination: './public/scripts'
+    config:
+      bare: true
+  styles:
+    source: './src/stylus'
+    watch: './src/stylus/*.styl'
+    destination: './public/styles/'
 
 # error handle
 handleError = (err) ->
@@ -29,33 +30,34 @@ handleError = (err) ->
   this.emit 'end'
 
 # tasks
-gulp.task 'html', ->
-#   console.log $config.src.jade_files
-#   console.log $config.src.jade_dir
+gulp.task 'template', ->
+#   console.log config.src.jade_files
+#   console.log config.src.jade_dir
   gulp
-    .src $config.src.jade_files
+    .src config.templates.watch
     .pipe $.jade()
     .on 'error', handleError
-    .pipe gulp.dest $config.public.html_dir
+    .pipe gulp.dest config.templates.destination
 
-gulp.task 'js', ->
+gulp.task 'script', ->
   gulp
-    .src $config.src.coffee_files
-    .pipe $.coffee
-      bare: true
+    .src config.scripts.watch
+    .pipe $.coffee()
     .on 'error', handleError
-    .pipe gulp.dest $config.public.js_dir
+    .pipe gulp.dest config.scripts.destination
 
 gulp.task "style", ->
   gulp
-    .src "stylus/*.styl"
+    .src config.styles.watch
     .pipe $.stylus()
     .on 'error', handleError
-    .pipe gulp.dest "css/"
+    .pipe gulp.dest config.styles.destination
 
 # watch
 gulp.task 'watch', ->
-  gulp.watch $config.src.jade_dir, ['html', "js", "style"]
+  gulp.watch config.templates.watch, ['template']
+  gulp.watch config.scripts.watch, ['script']
+  gulp.watch config.styles.watch, ['style']
 
 #load
-gulp.task 'default', ['html', "js", "style"]
+gulp.task 'default', ['template', "script", "style"]

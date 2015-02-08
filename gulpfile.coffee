@@ -12,11 +12,13 @@ config =
     source: './src/jade'
     watch: ['./src/jade/*.jade', './src/jade/*/*.jade']
     destination: './public/templates'
+    config:
+      pretty: true
   scripts:
     source: './src/coffee'
     watch: './src/coffee/*.coffee'
     destination: './public/scripts'
-    config:
+    option:
       bare: true
   styles:
     source: './src/stylus'
@@ -35,7 +37,9 @@ gulp.task 'template', ->
 #   console.log config.src.jade_dir
   gulp
     .src config.templates.watch
-    .pipe $.jade()
+    .pipe $.jade(
+      config.templates.option
+    )
     .on 'error', handleError
     .pipe gulp.dest config.templates.destination
 
@@ -55,9 +59,9 @@ gulp.task "style", ->
 
 # watch
 gulp.task 'watch', ->
-  gulp.watch config.templates.watch, ['template']
-  gulp.watch config.scripts.watch, ['script']
-  gulp.watch config.styles.watch, ['style']
+  gulp.watch config.templates.source, ['template']
+  gulp.watch config.scripts.source, ['script']
+  gulp.watch config.styles.source, ['style']
 
 #load
 gulp.task 'default', ['template', "script", "style"]

@@ -1,13 +1,14 @@
 extends element
 
 block vars
-    :coffeescript
-        elementName = 'test-element'
+    - var elementName = 'test-element'
+    - var elementAttributes = 'message'
 
 block element
     template
-      p#check-polymer Yahello polymer!
-    script
-        :coffeescript
-            Polymer elementName, ->
-                foo: 'bar'
+      p#check-polymer {{message}} Polymer!
+    script.
+        Polymer('test-element', {
+            message: 'Yahello'
+        })
+

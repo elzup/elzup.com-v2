@@ -7,15 +7,17 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1')
 
         // build
-        link(rel='stylesheet', href='bower_components/normlize-css/normalize.css')
-        link(rel='stylesheet', href='style/test.css')
+        link(rel='stylesheet', href='bower_components/normalize-css/normalize.css')
+        link(rel='stylesheet', href='styles/test.css')
 
         script(src='bower_components/jquery/dist/jquery.min.js')
-        script(src='scripts/test.js')
 
-        // elements import
-        script(src='bower_componets/platform/platform.js')
-        link(rel='import', href='elements/test-element.jade')
+        // import polymer elements
+        script(src='bower_components/webcomponentsjs/webcomponents.min.js')
+        link(rel="import" href="bower_components/polymer/polymer.html")
+        link(rel='import', href='elements/test-element')
+
+        script(src='scripts/test.js')
 
     body
         #wrapper

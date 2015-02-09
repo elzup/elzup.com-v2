@@ -1,7 +1,5 @@
-doctype html
-html(lang="ja")
-    head
-        title Polymer + Material Design #1
-        script(src="/node_modules/")
-        p.
-            yaHello
+block vars
+    - var head = {'title': 'elzup.com', 'styles': ['/style/core.css'], 'scripts': []}
+extends templates/_include/layout.jade
+block content
+    p Yahello

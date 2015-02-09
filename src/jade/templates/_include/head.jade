@@ -1,0 +1,19 @@
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE-edge')
+title head.title
+meta(name='viewport', content='width=device-width, initial-scale=1')
+
+// build
+link(rel='stylesheet', href='/bower_components/normalize-css/normalize.css')
+each style in head.styles
+    link(rel='stylesheet', href=style)
+
+script(src='/bower_components/jquery/dist/jquery.min.js')
+
+// import polymer elements
+script(src='/bower_components/webcomponentsjs/webcomponents.min.js')
+link(rel='import', href='/bower_components/polymer/polymer.html')
+link(rel='import', href='/elements/test-element')
+
+each script in head.scripts
+    script(src=script)

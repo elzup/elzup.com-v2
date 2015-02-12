@@ -13,7 +13,8 @@ script(src='/bower_components/jquery/dist/jquery.min.js')
 // import polymer elements
 script(src='/bower_components/webcomponentsjs/webcomponents.min.js')
 link(rel='import', href='/bower_components/polymer/polymer.html')
-link(rel='import', href='/elements/test-element')
+each template in head.templates
+    link(rel='import', href=template)
 
 each script in head.scripts
     script(src=script)

@@ -1,0 +1,20 @@
+extends element
+
+block vars
+    - var elementName = 'card-element'
+    - var elementAttributes = 'name description'
+
+block element
+    template
+        article.elzup-card
+            h4.name {{name}}
+            p.description {{description}}
+    script.
+        Polymer({
+            name: 'name undefined',
+            description: 'description undefined',
+            onload: function() {
+                this.name = 'hoge';
+            }
+        })
+

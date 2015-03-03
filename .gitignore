@@ -1,6 +1,5 @@
 node_modules/
 .idea/
 public/bower_components
-public/templates/*
 public/styles/*
 public/scripts/*

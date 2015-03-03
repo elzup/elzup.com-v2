@@ -5,7 +5,6 @@
 #    RewriteBase /
 #    in local
     RewriteBase /elzup.com/v2/public/
-    DirectorySlash Off
 
 # TODO:
     RewriteCond %{REQUEST_FILENAME} !-f

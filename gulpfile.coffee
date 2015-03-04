@@ -59,9 +59,8 @@ gulp.task "style", ->
 
 # watch
 gulp.task 'watch', ->
-  gulp.watch config.templates.source, ['template']
   gulp.watch config.scripts.source, ['script']
   gulp.watch config.styles.source, ['style']
 
 #load
-gulp.task 'default', ['template', "script", "style"]
+gulp.task 'default', ["script", "style"]

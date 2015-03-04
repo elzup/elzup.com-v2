@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine ON
+#    in server
+#    RewriteBase /
+#    in local
+    RewriteBase /elzup.com/v2/public/
+
+# TODO:
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond $0 !templates/
+    RewriteRule (.*)$ templates/$1 [L,NC,QSA]
+
+#    RewriteRule ^(.*)index.html $1 [R=301,L]
+</IfModule>
+

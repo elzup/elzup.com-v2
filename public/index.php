@@ -14,22 +14,23 @@
   <link rel="import" href="./bower_components/polymer/polymer.html">
   <link rel="import" href="./elements/card-element">
 </head>
+<?php
+
+require_once('./config/constants.php');
+require_once('./classes/production.php');
+require_once('./helpers/setup_productions.php');
+$products = get_productions();
+
+?>
 <body>
 <div id="wrapper">
   <h1>elzup.com</h1>
   <div class="cards-box">
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
-    <card-element name="カードタイトル"
-                  description="詳細分"></card-element>
+    <?php
+    /** @var Production $p */
+    foreach ($products as $p) { ?>
+      <card-element name="カードタイトル" description="詳細分"></card-element>
+    <?php } ?>
   </div>
 </div>
 </body>

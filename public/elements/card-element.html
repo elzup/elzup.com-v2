@@ -1,18 +1,52 @@
-<polymer-element name="card-element" attributes="name description">
-  <template>
-    <article class="elzup-card">
-      <h4 class="name">{{name}}</h4>
-      <p class="description">
-        {{description}}
-      </p>
-    </article>
-  </template>
-  <script>
-    Polymer({
-      name: 'name undefined',
-      description: 'description undefined',
-      onload: function() {
-        this.name = 'hoge';
-    }})
-  </script>
+<polymer-element name="card-element" attributes="id name light_detail type detail tech_list date img_src link members">
+	<template>
+		<article class="elzup-card">
+			<h4 class="name">{{name}}</h4>
+			<p class="description">
+				{{description}}
+			</p>
+		</article>
+
+		<div id="pi{{id}}" class="production-item half">
+			<div class="img-box">
+				<a href="<?= $p->img_src ?>" rel="lightbox">
+					<img class="sc" src="<?= $p->img_src ?>" alt="elzup.com <?= $p->name ?>" />
+				</a>
+			</div>
+			<div class="detail-box">
+				<a href="<?= $p->link ?>" class="<?= $p->link ? '' : 'disabled' ?>" target="_blank">
+					<span class="name"><?= $p->name ?></span><span class="icon-jump"><?= $p->link ? '↗' : '' ?></span>
+				</a>
+				<p class="light-detail"><?= $p->light_detail ?></p>
+				<p class="detail"><?= $p->detail ?></p>
+			</div>
+			<div class="members">
+				<?php if ($mems = $p->members) { ?>
+				<span class="tips">共同制作者</span>
+				<?php foreach ($mems as $sn => $text) { ?>
+				<p class="member">
+					<a href="//twitter.com/<?= $sn ?>" target="_blank"><span class="member-name">@<?= $sn ?></span></a>
+					<span class="text"><?= $text ?></span>
+				</p>
+				<?php } ?>
+				<?php } ?>
+			</div>
+			<div class="tags">
+				<?php
+                        foreach ($p->tech_list as $tech) {
+				tag_techtag($tech);
+				$techtag_counts[$tech] ++;
+				}
+				?>
+			</div>
+		</div>
+	</template>
+	<script>
+		Polymer({
+			name: 'name undefined',
+			description: 'description undefined',
+			onload: function() {
+				this.name = 'hoge';
+			}})
+	</script>
 </polymer-element>

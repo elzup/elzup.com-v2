@@ -20,6 +20,7 @@ require_once('./config/constants.php');
 require_once('./classes/production.php');
 require_once('./helpers/setup_productions.php');
 $products = get_productions();
+var_dump($products);
 
 ?>
 <body>

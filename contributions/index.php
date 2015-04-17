@@ -9,6 +9,8 @@ $datas = array();
 
 $lib = array('？', '①', '②', '③', '④');
 
+$collib = array('gray', 'blue', '#000159', '#8678ff', '#000088');
+
 $lines = explode("\n", $f);
 array_shift($lines);
 foreach ($lines as $i => $line) {
@@ -65,7 +67,6 @@ foreach ($datas as $data) {
             display: flex;
             height: 1.0em;
             padding-left: 5px;
-            border-bottom: solid gray 1px;
             margin-bottom: 3px;
         }
 
@@ -150,17 +151,37 @@ foreach ($datas as $data) {
                         <?php } ?>
                     </div>
                     <div class="commits">
-                        <ul>
-                            <?php foreach ($logs as $i => $log) {
+                        <svg height="20" width="1000">
+                            <line x1="0" y1="10" x2="1000" y2="10" style="stroke:black;stroke-width:0.1" />
+                            <?php for ($i = 0; $i < 24; $i++) { ?>
+                                <line x1="<?= $i * (1000 / 24) ?>" y1="0" x2="<?= $i * (1000 / 24) ?>" y2="20" style="stroke:black;stroke-width:0.1" />
+                            <?php } ?>
+                            <?php
+                            $prex = 0;
+                            foreach ($logs as $i => $log) {
                                 $in = !mb_strpos($log['place'], "退室");
                                 preg_match('#(.)号館#u', $log['place'], $ma);
-                                $p = @$ma[1] ?: 0; ?>
-                                <li class="commit <?= ($in ? ($pre ? '' : 'in') : 'out') ?> b<?= $p ?>">
-                                    <?= $p ?>
-                                </li>
-                                <?php $pre = $in;
-                            } ?>
-                        </ul>
+                                list($hr, $min, $sec) = explode(':', $log['time']);
+                                $p = @$ma[1] ?: 0;
+
+                                $mw = 1000;
+                                $cx = ($mw * $hr / 24) + ($mw / 24 / 60) * $min;
+                                if ($i == 0 && @$pre_least) { ?>
+                                    <line x1="0" y1="10" x2="<?= $cx ?>" y2="10" style="stroke:blue;stroke-width:3" />
+                                <?php } else if (count($logs) - 1 == $i && $is_least) { ?>
+                                    <line x1="<?= $cx ?>" y1="10" x2="1000" y2="10" style="stroke:blue;stroke-width:3" />
+                                <?php } elseif (isset($pre) && $pre) { ?>
+                                    <line x1="<?= $prex ?>" y1="10" x2="<?= $cx ?>" y2="10" style="stroke:blue;stroke-width:3" />
+                                <?php } ?>
+                                    <circle cx="<?= $cx ?>" cy="10" r="5" stroke="" stroke-width="0" fill="<?= $collib[$p] ?>" />
+                                <?php
+                                $pre = $in;
+                                $prex = $cx;
+                            }
+                            $pre_least = $is_least;
+                            ?>
+                            </g>
+                        </svg>
                     </div>
                 </li>
             <?php } ?>

@@ -1,5 +1,7 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+stylus = require 'gulp-stylus'
+autoprefixer = require 'gulp-autoprefixer'
 
 $ = require('gulp-load-plugins')()
 
@@ -53,14 +55,20 @@ gulp.task 'script', ->
 gulp.task "style", ->
   gulp
     .src config.styles.watch
-    .pipe $.stylus()
+    .pipe stylus
+      set: ['compress']
+    .pipe autoprefixer
+      browsers: ['last 2 versions']
+
     .on 'error', handleError
     .pipe gulp.dest config.styles.destination
+#  .pipe stylus
+
 
 # watch
 gulp.task 'watch', ->
-  gulp.watch config.scripts.source, ['script']
-  gulp.watch config.styles.source, ['style']
+  gulp.watch config.scripts.watch, ['script']
+  gulp.watch config.styles.watch, ['style']
 
 #load
 gulp.task 'default', ["script", "style"]

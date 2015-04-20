@@ -1,0 +1,25 @@
+<polymer-element name="toplink-panel" attributes="name href">
+	<template>
+		<style>
+			:host {
+				width: 25%;
+				display: block;
+				text-align: center;
+			}
+		</style>
+		<a href="{{href}}">
+			<section>
+				<h2>{{name}}</h2>
+			</section>
+		</a>
+	</template>
+	<script>
+		Polymer({
+			name: 'name undefined',
+			description: 'description undefined',
+			onload: function () {
+				this.name = 'hoge';
+			}
+		})
+	</script>
+</polymer-element>

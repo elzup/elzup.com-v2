@@ -1,0 +1,37 @@
+<polymer-element name="top-panel" attributes="name href">
+	<template>
+		<style>
+			:host {
+				width: 25%;
+				height: 100%;
+				display: table;
+				text-align: center;
+				color: white;
+			}
+
+			:host section {
+				vertical-align: middle;
+				display: table-cell;
+			}
+			:host a {
+				color: white;
+				text-decoration: none;
+				display: block;
+			}
+		</style>
+		<section class="table-cell">
+			<a href="{{href}}">
+				<h2>{{name}}</h2>
+			</a>
+		</section>
+	</template>
+	<script>
+		Polymer({
+			name: 'name undefined',
+			description: 'description undefined',
+			onload: function () {
+				this.name = 'hoge';
+			}
+		})
+	</script>
+</polymer-element>

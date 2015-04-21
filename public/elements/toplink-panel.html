@@ -1,24 +1,35 @@
-<polymer-element name="toplink-panel" attributes="name href">
+<polymer-element name="toplink-panel" attributes="name href color">
 	<template>
 		<style>
 			:host {
-				width: 25%;
+				width: 50%;
+				height: 200px;
+				display: table;
+			}
+
+			:host section {
+				vertical-align: middle;
+				display: table-cell;
+				height: 100%;
+				background-color: {{color}};
+			}
+
+			:host a {
+				color: white;
+				text-decoration: none;
 				display: block;
-				text-align: center;
 			}
 		</style>
-		<a href="{{href}}">
-			<section>
-				<h2>{{name}}</h2>
-			</section>
-		</a>
+		<section>
+			<a href="{{href}}">
+				<h3>{{name}}</h3>
+			</a>
+		</section>
 	</template>
 	<script>
 		Polymer({
-			name: 'name undefined',
-			description: 'description undefined',
-			onload: function () {
-				this.name = 'hoge';
+			ready: function () {
+				this.height = this.width
 			}
 		})
 	</script>
